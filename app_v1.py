@@ -31,6 +31,26 @@ css = """
     background-color: #f5f5f5;
   }
 
+  /* Streamlit 기본 스타일 제거 */
+  .stApp > header {
+    background-color: transparent;
+  }
+  .stApp > footer {
+    visibility: hidden;
+  }
+  .stDeployButton {
+    display: none;
+  }
+  div[data-testid="stDecoration"] {
+    display: none;
+  }
+  div[data-testid="stVerticalBlock"] > div:has(> div.stSelectbox) {
+    background-color: transparent;
+  }
+  div[data-testid="stVerticalBlock"] > div:has(> div.stDateInput) {
+    background-color: transparent;
+  }
+
   /* 메인 타이틀 */
   .title {
     font-size: 28px;
@@ -213,6 +233,12 @@ css = """
   .stSelectbox > div > div:hover {
     border-color: #0066cc;
     background-color: #f0f7ff;
+  }
+  .stSelectbox > div > div[data-baseweb="select"] > div {
+    color: #1a1a1a !important;
+  }
+  .stSelectbox > div > div[data-baseweb="select"] > div:hover {
+    color: #0066cc !important;
   }
 
   /* 날짜 선택 스타일 */

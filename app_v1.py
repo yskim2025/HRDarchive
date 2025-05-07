@@ -27,18 +27,18 @@ css = """
   html, body, [class*="css"] { 
     font-family: 'Pretendard', sans-serif; 
     font-size: 15px;
-    color: #334155;
-    background-color: #f8fafc;
+    color: #1a1a1a;
+    background-color: #f5f5f5;
   }
 
   /* 메인 타이틀 */
   .title {
     font-size: 28px;
-    font-weight: 700;
-    color: #0f172a;
-    margin-bottom: 2rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 1.5rem;
     padding-bottom: 0.75rem;
-    border-bottom: 2px solid #e2e8f0;
+    border-bottom: 3px solid #0066cc;
     letter-spacing: -0.5px;
   }
 
@@ -46,61 +46,62 @@ css = """
   .card {
     background: #ffffff;
     border: none;
-    border-radius: 20px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.04);
-    padding: 2rem;
-    margin-bottom: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
     transition: all 0.3s ease;
   }
   .card:hover {
-    box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
     transform: translateY(-2px);
   }
 
   /* 섹션 타이틀 */
   .section-title {
     font-size: 20px;
-    font-weight: 600;
-    color: #0f172a;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid #e2e8f0;
+    font-weight: 700;
+    color: #0066cc;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e6e6e6;
     letter-spacing: -0.3px;
   }
 
   /* 버튼 스타일 */
   .stButton > button {
-    background-color: #3b82f6;
+    background-color: #0066cc;
     color: white;
     border: none;
     padding: 0.75rem 1.5rem;
-    border-radius: 12px;
-    font-weight: 500;
+    border-radius: 8px;
+    font-weight: 600;
     transition: all 0.3s ease;
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 4px 12px rgba(59,130,246,0.1);
+    margin-top: 0.75rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0,102,204,0.2);
   }
   .stButton > button:hover {
-    background-color: #2563eb;
-    box-shadow: 0 6px 16px rgba(59,130,246,0.2);
+    background-color: #0052a3;
+    box-shadow: 0 4px 12px rgba(0,102,204,0.3);
     transform: translateY(-1px);
   }
 
   /* 라디오 버튼 스타일 */
   .stRadio > div {
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
+    margin-top: 0.75rem;
+    margin-bottom: 1rem;
   }
   .stRadio > div[role="radiogroup"] > label {
     padding: 0.75rem 1.25rem;
-    border-radius: 10px;
+    border-radius: 8px;
     transition: all 0.2s ease;
-    color: #475569;
+    color: #4d4d4d;
+    font-weight: 500;
   }
   .stRadio > div[role="radiogroup"] > label:hover {
-    background-color: #f1f5f9;
-    color: #0f172a;
+    background-color: #f0f7ff;
+    color: #0066cc;
   }
 
   /* 테이블 스타일 */
@@ -108,51 +109,54 @@ css = """
     border-collapse: separate;
     border-spacing: 0;
     width: 100%;
-    margin: 1rem 0;
+    margin: 0.75rem 0;
   }
   .card table th {
-    background-color: #f8fafc !important;
-    color: #0f172a !important;
-    font-weight: 600 !important;
-    padding: 1rem 1.5rem !important;
+    background-color: #f0f7ff !important;
+    color: #0066cc !important;
+    font-weight: 700 !important;
+    padding: 1rem 1.25rem !important;
     text-align: center !important;
-    border-bottom: 2px solid #e2e8f0 !important;
+    border-bottom: 2px solid #e6e6e6 !important;
     font-size: 0.95rem;
   }
   .card table td {
-    padding: 1rem 1.5rem !important;
-    border-bottom: 1px solid #e2e8f0 !important;
-    color: #475569;
+    padding: 0.875rem 1.25rem !important;
+    border-bottom: 1px solid #e6e6e6 !important;
+    color: #4d4d4d;
     font-size: 0.95rem;
   }
   .card table tr:hover td {
-    background-color: #f8fafc !important;
-    color: #0f172a;
+    background-color: #f8fbff !important;
+    color: #0066cc;
   }
 
   /* 셀 정렬 */
   .card table td:nth-child(1),  /* No */
   .card table td:nth-child(3) {  /* 회차 */
     text-align: center !important;
+    font-weight: 500;
   }
   .card table td:nth-child(2) {  /* 훈련기관 */
     text-align: left !important;
+    font-weight: 500;
   }
   .card table td:nth-child(4),  /* 신청인원 */
   .card table td:nth-child(5) {  /* 교육비합계 */
     text-align: right !important;
-    font-weight: 500;
+    font-weight: 600;
+    color: #0066cc;
   }
 
   /* 에러 메시지 */
   .error-message {
     color: #dc2626;
-    font-weight: 500;
-    padding: 1rem 1.5rem;
-    border-radius: 12px;
-    background-color: #fef2f2;
-    margin: 1rem 0;
-    border: 1px solid #fee2e2;
+    font-weight: 600;
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    background-color: #fff5f5;
+    margin: 0.75rem 0;
+    border: 1px solid #fecaca;
     font-size: 0.95rem;
   }
 
@@ -160,64 +164,115 @@ css = """
   div[data-testid="stDataFrame"] {
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
   }
   div[data-testid="stDataFrame"] th {
-    background-color: #f8fafc !important;
-    color: #0f172a !important;
-    font-weight: 600 !important;
+    background-color: #f0f7ff !important;
+    color: #0066cc !important;
+    font-weight: 700 !important;
     text-align: center !important;
-    padding: 1rem 1.5rem !important;
+    padding: 1rem 1.25rem !important;
     font-size: 0.95rem;
   }
   div[data-testid="stDataFrame"] td {
-    padding: 1rem 1.5rem !important;
-    color: #475569;
+    padding: 0.875rem 1.25rem !important;
+    color: #4d4d4d;
     font-size: 0.95rem;
   }
 
   /* 다운로드 버튼 */
   .stDownloadButton > button {
-    background-color: #10b981;
+    background-color: #00a3cc;
     color: white;
     border: none;
     padding: 0.75rem 1.5rem;
-    border-radius: 12px;
-    font-weight: 500;
+    border-radius: 8px;
+    font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(16,185,129,0.1);
+    box-shadow: 0 2px 8px rgba(0,163,204,0.2);
   }
   .stDownloadButton > button:hover {
-    background-color: #059669;
-    box-shadow: 0 6px 16px rgba(16,185,129,0.2);
+    background-color: #008fb3;
+    box-shadow: 0 4px 12px rgba(0,163,204,0.3);
     transform: translateY(-1px);
   }
 
   /* 로딩 스피너 */
   .stSpinner > div {
-    border-color: #3b82f6;
+    border-color: #0066cc;
   }
 
   /* 선택 상자 스타일 */
   .stSelectbox > div > div {
     background-color: #ffffff;
-    border-radius: 12px;
-    border: 1px solid #e2e8f0;
-    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid #e6e6e6;
+    padding: 0.625rem;
+    font-weight: 500;
   }
   .stSelectbox > div > div:hover {
-    border-color: #3b82f6;
+    border-color: #0066cc;
+    background-color: #f0f7ff;
   }
 
   /* 날짜 선택 스타일 */
   .stDateInput > div > div {
     background-color: #ffffff;
-    border-radius: 12px;
-    border: 1px solid #e2e8f0;
-    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid #e6e6e6;
+    padding: 0.625rem;
   }
   .stDateInput > div > div:hover {
-    border-color: #3b82f6;
+    border-color: #0066cc;
+    background-color: #f0f7ff;
+  }
+
+  /* 라벨 스타일 */
+  .stSelectbox label, .stDateInput label {
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 0.375rem;
+  }
+
+  /* 푸터 스타일 */
+  .footer {
+    margin-top: 2rem;
+    padding: 1.5rem 0;
+    background-color: #ffffff;
+    border-top: 1px solid #e6e6e6;
+  }
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .footer-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #0066cc;
+    margin-bottom: 0.75rem;
+  }
+  .footer-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .footer-text {
+    color: #666666;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  .footer-version {
+    color: #0066cc;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  .footer-copyright {
+    color: #999999;
+    font-size: 0.85rem;
+    margin-top: 0.75rem;
   }
 </style>
 """
@@ -423,3 +478,25 @@ if "df_grouped" in st.session_state:
     )
 
     st.markdown("</div>", unsafe_allow_html=True)
+
+# 푸터 추가
+st.markdown("""
+<div class="footer">
+    <div class="footer-content">
+        <div class="footer-title">사업주훈련(고용24) 분석 대시보드</div>
+        <div class="footer-info">
+            <div class="footer-text">
+                <p>본 대시보드는 고용24 API를 활용하여 사업주훈련 과정의 데이터를 분석하고 시각화합니다.</p>
+                <p>데이터 출처: 고용24 (www.work24.go.kr)</p>
+            </div>
+            <div class="footer-version">
+                <p>Version 1.0.0</p>
+                <p>Last Updated: 2024.03</p>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            © 2024 Alpaco Corp. All rights reserved.
+        </div>
+    </div>
+</div>
+""", unsafe_allow_html=True)

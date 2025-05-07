@@ -15,9 +15,9 @@ logger = logging.getLogger(__name__)
 
 # 1. 환경변수 로드
 load_dotenv()
-AUTH_KEY = os.getenv("AUTH_KEY", "")
+AUTH_KEY = os.getenv("AUTH_KEY") or st.secrets["AUTH_KEY"]
 if not AUTH_KEY:
-    st.error("❗ 환경변수 `AUTH_KEY`가 설정되어 있지 않습니다. `.env` 파일을 확인해주세요.")
+    st.error("❗ API 키가 설정되어 있지 않습니다. Streamlit Cloud의 Secrets 설정을 확인해주세요.")
     st.stop()
 
 # 2. 전역 CSS

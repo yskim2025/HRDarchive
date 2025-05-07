@@ -27,58 +27,64 @@ css = """
   html, body, [class*="css"] { 
     font-family: 'Pretendard', sans-serif; 
     font-size: 15px;
-    color: #2c3e50;
+    color: #334155;
+    background-color: #f8fafc;
   }
 
   /* 메인 타이틀 */
   .title {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 700;
-    color: #1a4c8b;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid #e9ecef;
+    color: #0f172a;
+    margin-bottom: 2rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #e2e8f0;
+    letter-spacing: -0.5px;
   }
 
   /* 카드 스타일 */
   .card {
     background: #ffffff;
     border: none;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    padding: 1.5rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+    padding: 2rem;
     margin-bottom: 2rem;
     transition: all 0.3s ease;
   }
   .card:hover {
-    box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+    transform: translateY(-2px);
   }
 
   /* 섹션 타이틀 */
   .section-title {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
-    color: #1a4c8b;
-    margin-bottom: 1.25rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid #e9ecef;
+    color: #0f172a;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #e2e8f0;
+    letter-spacing: -0.3px;
   }
 
   /* 버튼 스타일 */
   .stButton > button {
-    background-color: #1a4c8b;
+    background-color: #3b82f6;
     color: white;
     border: none;
-    padding: 0.5rem 1.5rem;
-    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
     font-weight: 500;
     transition: all 0.3s ease;
     margin-top: 1rem;
     margin-bottom: 1.5rem;
+    box-shadow: 0 4px 12px rgba(59,130,246,0.1);
   }
   .stButton > button:hover {
-    background-color: #153a6b;
-    box-shadow: 0 4px 12px rgba(26,76,139,0.2);
+    background-color: #2563eb;
+    box-shadow: 0 6px 16px rgba(59,130,246,0.2);
+    transform: translateY(-1px);
   }
 
   /* 라디오 버튼 스타일 */
@@ -87,12 +93,14 @@ css = """
     margin-bottom: 1.5rem;
   }
   .stRadio > div[role="radiogroup"] > label {
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
+    padding: 0.75rem 1.25rem;
+    border-radius: 10px;
     transition: all 0.2s ease;
+    color: #475569;
   }
   .stRadio > div[role="radiogroup"] > label:hover {
-    background-color: #f8f9fa;
+    background-color: #f1f5f9;
+    color: #0f172a;
   }
 
   /* 테이블 스타일 */
@@ -100,21 +108,26 @@ css = """
     border-collapse: separate;
     border-spacing: 0;
     width: 100%;
+    margin: 1rem 0;
   }
   .card table th {
-    background-color: #f8f9fa !important;
-    color: #1a4c8b !important;
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
     font-weight: 600 !important;
-    padding: 1rem !important;
+    padding: 1rem 1.5rem !important;
     text-align: center !important;
-    border-bottom: 2px solid #e9ecef !important;
+    border-bottom: 2px solid #e2e8f0 !important;
+    font-size: 0.95rem;
   }
   .card table td {
-    padding: 0.75rem 1rem !important;
-    border-bottom: 1px solid #e9ecef !important;
+    padding: 1rem 1.5rem !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    color: #475569;
+    font-size: 0.95rem;
   }
   .card table tr:hover td {
-    background-color: #f8f9fa !important;
+    background-color: #f8fafc !important;
+    color: #0f172a;
   }
 
   /* 셀 정렬 */
@@ -128,32 +141,39 @@ css = """
   .card table td:nth-child(4),  /* 신청인원 */
   .card table td:nth-child(5) {  /* 교육비합계 */
     text-align: right !important;
+    font-weight: 500;
   }
 
   /* 에러 메시지 */
   .error-message {
     color: #dc2626;
     font-weight: 500;
-    padding: 1rem;
-    border-radius: 8px;
-    background-color: #fee2e2;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    background-color: #fef2f2;
     margin: 1rem 0;
-    border: 1px solid #fecaca;
+    border: 1px solid #fee2e2;
+    font-size: 0.95rem;
   }
 
   /* Streamlit DataFrame 스타일 */
   div[data-testid="stDataFrame"] {
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.04);
   }
   div[data-testid="stDataFrame"] th {
-    background-color: #f8f9fa !important;
-    color: #1a4c8b !important;
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
     font-weight: 600 !important;
     text-align: center !important;
+    padding: 1rem 1.5rem !important;
+    font-size: 0.95rem;
   }
   div[data-testid="stDataFrame"] td {
-    padding: 0.75rem 1rem !important;
+    padding: 1rem 1.5rem !important;
+    color: #475569;
+    font-size: 0.95rem;
   }
 
   /* 다운로드 버튼 */
@@ -161,19 +181,43 @@ css = """
     background-color: #10b981;
     color: white;
     border: none;
-    padding: 0.5rem 1.5rem;
-    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
     font-weight: 500;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(16,185,129,0.1);
   }
   .stDownloadButton > button:hover {
     background-color: #059669;
-    box-shadow: 0 4px 12px rgba(16,185,129,0.2);
+    box-shadow: 0 6px 16px rgba(16,185,129,0.2);
+    transform: translateY(-1px);
   }
 
   /* 로딩 스피너 */
   .stSpinner > div {
-    border-color: #1a4c8b;
+    border-color: #3b82f6;
+  }
+
+  /* 선택 상자 스타일 */
+  .stSelectbox > div > div {
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    padding: 0.5rem;
+  }
+  .stSelectbox > div > div:hover {
+    border-color: #3b82f6;
+  }
+
+  /* 날짜 선택 스타일 */
+  .stDateInput > div > div {
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    padding: 0.5rem;
+  }
+  .stDateInput > div > div:hover {
+    border-color: #3b82f6;
   }
 </style>
 """

@@ -24,79 +24,156 @@ if not AUTH_KEY:
 css = """
 <style>
   @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-  html, body, [class*="css"] { font-family: 'Pretendard', sans-serif; font-size:15px; }
+  html, body, [class*="css"] { 
+    font-family: 'Pretendard', sans-serif; 
+    font-size: 15px;
+    color: #2c3e50;
+  }
 
+  /* 메인 타이틀 */
   .title {
-    font-size:20px; font-weight:600; margin-bottom:0.5rem;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a4c8b;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e9ecef;
   }
+
+  /* 카드 스타일 */
   .card {
-    background:#fff; border:1px solid #ececec; border-radius:12px;
-    box-shadow:0 2px 6px rgba(0,0,0,0.08); padding:1rem 1.5rem;
-    margin-bottom:1.5rem;
+    background: #ffffff;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
   }
+  .card:hover {
+    box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+  }
+
+  /* 섹션 타이틀 */
   .section-title {
-    font-size:17px; font-weight:600; color:#1a4c8b;
-    margin-bottom:0.75rem; border-bottom:1px solid #dfe3e8;
-    padding-bottom:0.25rem;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a4c8b;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e9ecef;
   }
-  .stButton > button { margin-top:0.5rem; margin-bottom:1rem; }
-  .stRadio  > div    { margin-top:1rem;   margin-bottom:1rem; }
-  /* 테이블 헤더 스타일 */
+
+  /* 버튼 스타일 */
+  .stButton > button {
+    background-color: #1a4c8b;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .stButton > button:hover {
+    background-color: #153a6b;
+    box-shadow: 0 4px 12px rgba(26,76,139,0.2);
+  }
+
+  /* 라디오 버튼 스타일 */
+  .stRadio > div {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .stRadio > div[role="radiogroup"] > label {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+  .stRadio > div[role="radiogroup"] > label:hover {
+    background-color: #f8f9fa;
+  }
+
+  /* 테이블 스타일 */
+  .card table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+  }
   .card table th {
-    background-color:#f5f6fa!important;
-    text-align:center!important; 
-    font-weight:600!important;
+    background-color: #f8f9fa !important;
+    color: #1a4c8b !important;
+    font-weight: 600 !important;
+    padding: 1rem !important;
+    text-align: center !important;
+    border-bottom: 2px solid #e9ecef !important;
   }
-  /* 테이블 셀 스타일 */
-  .card table tr:nth-child(odd) td {
-    background-color:#fbfbfb!important;
+  .card table td {
+    padding: 0.75rem 1rem !important;
+    border-bottom: 1px solid #e9ecef !important;
   }
+  .card table tr:hover td {
+    background-color: #f8f9fa !important;
+  }
+
+  /* 셀 정렬 */
   .card table td:nth-child(1),  /* No */
   .card table td:nth-child(3) {  /* 회차 */
-    text-align:center!important;
+    text-align: center !important;
   }
   .card table td:nth-child(2) {  /* 훈련기관 */
-    text-align:left!important;
+    text-align: left !important;
   }
   .card table td:nth-child(4),  /* 신청인원 */
   .card table td:nth-child(5) {  /* 교육비합계 */
-    text-align:right!important;
+    text-align: right !important;
   }
+
+  /* 에러 메시지 */
   .error-message {
     color: #dc2626;
     font-weight: 500;
-    padding: 0.5rem;
-    border-radius: 4px;
+    padding: 1rem;
+    border-radius: 8px;
     background-color: #fee2e2;
-    margin: 0.5rem 0;
+    margin: 1rem 0;
+    border: 1px solid #fecaca;
   }
-  /* 간격 조정을 위한 스타일 */
-  .stMarkdown {
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  .stMarkdown > div {
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  .stMarkdown > div > div {
-    margin: 0 !important;
-    padding: 0 !important;
-  }
+
   /* Streamlit DataFrame 스타일 */
+  div[data-testid="stDataFrame"] {
+    border-radius: 8px;
+    overflow: hidden;
+  }
   div[data-testid="stDataFrame"] th {
+    background-color: #f8f9fa !important;
+    color: #1a4c8b !important;
+    font-weight: 600 !important;
     text-align: center !important;
   }
-  div[data-testid="stDataFrame"] th[data-testid="stDataFrameColumnHeader"] {
-    text-align: center !important;
+  div[data-testid="stDataFrame"] td {
+    padding: 0.75rem 1rem !important;
   }
-  div[data-testid="stDataFrame"] th[data-testid="stDataFrameColumnHeader"] > div {
-    text-align: center !important;
-    justify-content: center !important;
+
+  /* 다운로드 버튼 */
+  .stDownloadButton > button {
+    background-color: #10b981;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
   }
-  div[data-testid="stDataFrame"] th[data-testid="stDataFrameColumnHeader"] > div > div {
-    text-align: center !important;
-    justify-content: center !important;
+  .stDownloadButton > button:hover {
+    background-color: #059669;
+    box-shadow: 0 4px 12px rgba(16,185,129,0.2);
+  }
+
+  /* 로딩 스피너 */
+  .stSpinner > div {
+    border-color: #1a4c8b;
   }
 </style>
 """

@@ -356,7 +356,7 @@ if "df_grouped" in st.session_state:
 # 푸터
 st.markdown("""
 <div class="footer">
-    <p>© 2024 고려대학교 24대 시보드. All rights reserved.<br>
+    <p>© 2025 알파코. All rights reserved.<br>
     Last updated: 2025.05</p>
 </div>
 """, unsafe_allow_html=True)

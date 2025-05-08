@@ -24,32 +24,12 @@ if not AUTH_KEY:
 css = """
 <style>
   @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-  html, body, [class*="css"] {
-    font-family: 'Pretendard', sans-serif;
-    font-size: 15px;
-    color: #222;
-    background-color: #f8fafc;
-  }
-  /* 제목과 파라미터 설정 사이의 흰색 네모 박스 제거 */
-  .block-container {
-    padding-top: 0 !important;
+  html, body, [class*="css"], .stApp, .block-container, .main .block-container,
+  .st-emotion-cache-1avcm0n, .st-emotion-cache-1wivap2, .st-emotion-cache-1y4p8pa, .st-emotion-cache-z5fcl4,
+  .st-emotion-cache-13ln4jf, .st-emotion-cache-1r6slb0 {
     background: transparent !important;
-  }
-  .st-emotion-cache-1avcm0n {
-    padding-top: 0 !important;
-    background: transparent !important;
-  }
-  .st-emotion-cache-1wivap2 {
-    background: transparent !important;
-  }
-  .st-emotion-cache-1y4p8pa {
-    background: transparent !important;
-  }
-  .st-emotion-cache-z5fcl4 {
-    background: transparent !important;
-  }
-  .main .block-container {
-    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
   }
   .title {
     font-size: 24px;
@@ -58,6 +38,7 @@ css = """
     margin-bottom: 1.5rem;
     padding-bottom: 0.5rem;
     border-bottom: 2px solid #e9ecef;
+    text-align: left;
   }
   .card {
     background: #fff;
@@ -139,14 +120,19 @@ css = """
     margin: 1rem 0;
     border: 1px solid #fecaca;
   }
-  /* 푸터 스타일 수정 */
   .footer {
     text-align: center;
-    padding: 1.5rem 0;
+    padding: 1.5rem 0 0.5rem 0;
     margin-top: 2rem;
-    border-top: 1px solid #e9ecef;
+    border-top: 2px solid #1a4c8b;
     color: #666;
     font-size: 0.9rem;
+    background: transparent;
+  }
+  .footer-desc {
+    color: #888;
+    font-size: 0.95em;
+    margin-bottom: 0.5em;
   }
 </style>
 """
@@ -217,7 +203,7 @@ def fetch_training_data(params: Dict[str, str]) -> List[Dict]:
         
     return results
 
-# 3. 페이지 제목
+# 3. 페이지 제목 (카드 위에 명확히 표시)
 st.markdown("<div class='title'>사업주훈련(고용24) 분석 대시보드</div>", unsafe_allow_html=True)
 
 # 4. 파라미터 설정 카드
@@ -356,6 +342,10 @@ if "df_grouped" in st.session_state:
 # 푸터
 st.markdown("""
 <div class="footer">
+    <div class="footer-desc">
+        본 대시보드는 고용24 API를 활용하여 사업주훈련 과정의 데이터를 분석하고 시각화합니다.<br>
+        데이터 출처: 고용24 (www.work24.go.kr)
+    </div>
     <p>© 2025 알파코. All rights reserved.<br>
     Last updated: 2025.05</p>
 </div>

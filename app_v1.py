@@ -30,6 +30,27 @@ css = """
     color: #222;
     background-color: #f8fafc;
   }
+  /* 제목과 파라미터 설정 사이의 흰색 네모 박스 제거 */
+  .block-container {
+    padding-top: 0 !important;
+    background: transparent !important;
+  }
+  .st-emotion-cache-1avcm0n {
+    padding-top: 0 !important;
+    background: transparent !important;
+  }
+  .st-emotion-cache-1wivap2 {
+    background: transparent !important;
+  }
+  .st-emotion-cache-1y4p8pa {
+    background: transparent !important;
+  }
+  .st-emotion-cache-z5fcl4 {
+    background: transparent !important;
+  }
+  .main .block-container {
+    background: transparent !important;
+  }
   .title {
     font-size: 24px;
     font-weight: 700;
@@ -117,6 +138,15 @@ css = """
     background-color: #fee2e2;
     margin: 1rem 0;
     border: 1px solid #fecaca;
+  }
+  /* 푸터 스타일 수정 */
+  .footer {
+    text-align: center;
+    padding: 1.5rem 0;
+    margin-top: 2rem;
+    border-top: 1px solid #e9ecef;
+    color: #666;
+    font-size: 0.9rem;
   }
 </style>
 """
@@ -323,24 +353,10 @@ if "df_grouped" in st.session_state:
 
     st.markdown("</div>", unsafe_allow_html=True)
 
-# 푸터 추가
+# 푸터
 st.markdown("""
 <div class="footer">
-    <div class="footer-content">
-        <div class="footer-title">사업주훈련(고용24) 분석 대시보드</div>
-        <div class="footer-info">
-            <div class="footer-text">
-                <p>본 대시보드는 고용24 API를 활용하여 사업주훈련 과정의 데이터를 분석하고 시각화합니다.</p>
-                <p>데이터 출처: 고용24 (www.work24.go.kr)</p>
-            </div>
-            <div class="footer-version">
-                <p>Version 1.0.0</p>
-                <p>Last Updated: 2024.03</p>
-            </div>
-        </div>
-        <div class="footer-copyright">
-            © 2024 Alpaco Corp. All rights reserved.
-        </div>
-    </div>
+    <p>© 2024 고려대학교 24대 시보드. All rights reserved.<br>
+    Last updated: 2025.05</p>
 </div>
 """, unsafe_allow_html=True)

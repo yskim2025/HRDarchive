@@ -225,15 +225,16 @@ def create_visualizations(df: pd.DataFrame) -> None:
     ])
     fig1.update_layout(
         title="상위 20개 훈련기관 신청인원",
-        font=dict(size=13),
-        title_font=dict(size=15),
+        font=dict(size=16),  # 폰트 크기 증가
+        title_font=dict(size=18),
         plot_bgcolor='#fafafa',
         paper_bgcolor='#fafafa',
         yaxis_title="신청인원",
         xaxis_title="훈련기관",
-        margin=dict(t=120, b=40),
+        margin=dict(t=80, b=60),  # 마진 조정
+        height=500,  # 그래프 높이 증가
         yaxis_tickformat=",d",
-        uniformtext_minsize=8,
+        uniformtext_minsize=10,
         uniformtext_mode='hide'
     )
     st.plotly_chart(fig1, use_container_width=True)
@@ -254,15 +255,16 @@ def create_visualizations(df: pd.DataFrame) -> None:
     ])
     fig2.update_layout(
         title="상위 20개 훈련기관 교육비 합계",
-        font=dict(size=13),
-        title_font=dict(size=15),
+        font=dict(size=16),  # 폰트 크기 증가
+        title_font=dict(size=18),
         plot_bgcolor='#fafafa',
         paper_bgcolor='#fafafa',
         yaxis_title="교육비 합계(억원)",
         xaxis_title="훈련기관",
-        margin=dict(t=120, b=40),
+        margin=dict(t=80, b=60),  # 마진 조정
+        height=500,  # 그래프 높이 증가
         yaxis_tickformat=".1f",
-        uniformtext_minsize=8,
+        uniformtext_minsize=10,
         uniformtext_mode='hide'
     )
     st.plotly_chart(fig2, use_container_width=True)
@@ -279,7 +281,14 @@ def create_visualizations(df: pd.DataFrame) -> None:
         markers=True
     )
     fig3.update_traces(line_color='#888888')
-    fig3.update_layout(font=dict(size=13), title_font=dict(size=15), plot_bgcolor='#fafafa', paper_bgcolor='#fafafa', yaxis_tickformat=",d")
+    fig3.update_layout(
+        font=dict(size=16),  # 폰트 크기 증가
+        title_font=dict(size=18),
+        plot_bgcolor='#fafafa',
+        paper_bgcolor='#fafafa',
+        yaxis_tickformat=",d",
+        height=500  # 그래프 높이 증가
+    )
     st.plotly_chart(fig3, use_container_width=True)
 
 def main():

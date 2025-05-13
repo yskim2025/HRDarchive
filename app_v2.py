@@ -28,7 +28,7 @@ AUTH_KEY = os.getenv("AUTH_KEY") or st.secrets.get("AUTH_KEY", "")
 st.set_page_config(
     page_title="HRD아카이브 대시보드",
     page_icon="📊",
-    layout="centered",
+    layout="wide",  # 화면 가로 사이즈를 넓게 설정
     initial_sidebar_state="expanded"
 )
 
@@ -313,7 +313,7 @@ def main():
         st.markdown('**개강일 범위 (종료)**')
         end_date = st.date_input(
             label="개강일 범위 (종료)",
-            value=datetime.today().date(),
+            value=datetime.today().date(),  # 접속하는 당일로 설정
             key='end_date_input',
             label_visibility='collapsed'
         )

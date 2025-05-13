@@ -46,8 +46,9 @@ st.markdown("""
         background-color: #f8f9fa;
         font-family: 'NanumBarunGothic', sans-serif;
         font-size: 11px;
-        max-width: 70%;
-        margin: 0 auto;
+        max-width: 90%; /* 전체 화면에 맞추되 좌우 여백 추가 */
+        margin: 0 auto; /* 중앙 정렬 */
+        padding-top: 2rem; /* 상단 여백 유지 */
     }
     .main-title {
         font-size: 1.0rem;

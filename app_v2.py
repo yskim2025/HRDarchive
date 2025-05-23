@@ -329,6 +329,13 @@ def create_visualizations(df: pd.DataFrame) -> None:
     st.plotly_chart(fig3, use_container_width=True)
 
 def main():
+    try:
+        import plotly.express as px
+        import plotly.graph_objects as go
+    except ImportError:
+        st.markdown('<h1 class="main-title">📊 HRD아카이브 대시보드</h1>', unsafe_allow_html=True)
+        st.warning('서비스 점검 안내: 현재 페이지는 **수정 작업**으로 인해 일시 중단되었습니다.\n\n잠시 후 다시 이용해 주세요.')
+        st.stop()
     st.markdown('<h1 class="main-title">📊 HRD아카이브 대시보드</h1>', unsafe_allow_html=True)
 
     # 상단에 조건 설정 영역 배치 (상하 구조)

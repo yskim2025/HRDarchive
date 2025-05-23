@@ -12,6 +12,7 @@ import logging
 from typing import Dict, List, Optional, Tuple
 import json
 import io
+from pytz import timezone  # 추가
 
 # 로깅 설정
 logging.basicConfig(level=logging.INFO)
@@ -46,7 +47,7 @@ st.markdown("""
         background-color: #f8f9fa;
         font-family: 'NanumBarunGothic', sans-serif;
         font-size: 11px;
-        max-width: 90%; /* 전체 화면에 맞추되 좌우 여백 추가 */
+        max-width: 70%; /* 이전 버전으로 복원 */
         margin: 0 auto; /* 중앙 정렬 */
         padding-top: 2rem; /* 상단 여백 유지 */
     }
@@ -89,7 +90,7 @@ st.markdown("""
         font-family: 'NanumBarunGothic', sans-serif !important;
     }
     .dataframe td {
-        padding: 0.15rem !important;
+        padding: 0.35rem !important; /* 내부 여백 5픽셀 추가 */
         font-size: 0.78rem !important;
         font-family: 'NanumBarunGothic', sans-serif !important;
     }
@@ -157,6 +158,10 @@ def fetch_training_data(params: Dict[str, str]) -> List[Dict]:
                 
             for row in rows:
                 try:
+                    # HRD 아카이브 데이터만 필터링
+                    if row.findtext("crseTracseSe", "") != "C0041H":
+                        continue
+                        
                     result = {
                         "훈련기관": row.findtext("subTitle", "").strip(),
                         "훈련과정명": row.findtext("title", "").strip(),
@@ -262,7 +267,7 @@ def create_visualizations(df: pd.DataFrame) -> None:
         paper_bgcolor='#fafafa',
         yaxis_title="교육비 합계(억원)",
         xaxis_title="훈련기관",
-        margin=dict(t=80, b=60),  # 마진 조정
+        margin=dict(t=600, b=240, l=180, r=180),  # 내부 여백을 3배로 증가
         height=500,  # 그래프 높이 증가
         yaxis_tickformat=".1f",
         uniformtext_minsize=10,
@@ -301,7 +306,7 @@ def main():
     with col1:
         st.markdown('**훈련유형**')
         st.markdown('<div class="graybox-text">HRD아카이브</div>', unsafe_allow_html=True)
-        course_type = "C0041H"
+        course_type = "C0041H"  # HRD 아카이브 코드
     with col2:
         st.markdown('**개강일 범위 (시작)**')
         start_date = st.date_input(
@@ -312,9 +317,14 @@ def main():
         )
     with col3:
         st.markdown('**개강일 범위 (종료)**')
+        # 한국 시간(KST) 기준으로 현재 날짜를 가져오기
+        kst = timezone('Asia/Seoul')
+        today_kst = datetime.now(kst).date()
+
+        # 개강일 범위 (종료) 설정
         end_date = st.date_input(
             label="개강일 범위 (종료)",
-            value=datetime.today().date(),  # 접속하는 당일로 설정
+            value=today_kst,  # 한국 시간 기준으로 현재 날짜 설정
             key='end_date_input',
             label_visibility='collapsed'
         )
@@ -327,7 +337,7 @@ def main():
         "pageSize": "100",
         "srchTraStDt": start_date.strftime("%Y%m%d"),
         "srchTraEndDt": end_date.strftime("%Y%m%d"),
-        "crseTracseSe": course_type,
+        "crseTracseSe": course_type,  # HRD 아카이브 코드 사용
         "sort": "ASC",
         "sortCol": "TRNG_BGDE",
     }

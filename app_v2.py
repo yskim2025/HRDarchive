@@ -152,7 +152,7 @@ def fetch_training_data(params: Dict[str, str]) -> List[Dict]:
                 "pageSize": "100",
                 "srchTraStDt": params["srchTraStDt"],
                 "srchTraEndDt": params["srchTraEndDt"],
-                "crseTracseSe": "C0041H",  # HRD 아카이브 코드
+                "crseTracseSe": "C0041A",  # HRD 아카이브 코드 (변경됨)
                 "sort": "ASC",
                 "sortCol": "TRNG_BGDE"  # 변경된 정렬 파라미터
             }
@@ -185,7 +185,7 @@ def fetch_training_data(params: Dict[str, str]) -> List[Dict]:
                     course_type = row.findtext("crseTracseSe", "").strip()
                     logger.info(f"훈련유형 코드: {course_type}")
                     
-                    if course_type != "C0041H":
+                    if course_type != "C0041A":  # HRD 아카이브 코드 변경
                         logger.warning(f"훈련유형 불일치: {course_type}")
                         continue
                         

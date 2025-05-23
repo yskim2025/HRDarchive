@@ -157,22 +157,34 @@ def fetch_training_data(params: Dict[str, str]) -> List[Dict]:
                 "sortCol": "TRNG_BGDE"  # 변경된 정렬 파라미터
             }
             
+            logger.info(f"API 요청 파라미터: {request_params}")
+            
             response = requests.get(BASE_URL, params=request_params, timeout=30)
             response.raise_for_status()
+            
+            # API 응답 내용 로깅
+            logger.info(f"API 응답 상태 코드: {response.status_code}")
+            logger.info(f"API 응답 헤더: {dict(response.headers)}")
             
             root = ET.fromstring(response.content)
             srch_list = root.find("srchList")
             if srch_list is None:
+                logger.warning("srchList를 찾을 수 없습니다.")
                 break
                 
             rows = srch_list.findall("scn_list")
             if not rows:
+                logger.info(f"페이지 {page}에서 데이터가 없습니다.")
                 break
                 
+            logger.info(f"페이지 {page}에서 {len(rows)}개의 데이터를 찾았습니다.")
+            
             for row in rows:
                 try:
                     # 훈련유형 코드 확인
                     course_type = row.findtext("crseTracseSe", "").strip()
+                    logger.info(f"훈련유형 코드: {course_type}")
+                    
                     if course_type != "C0041H":
                         logger.warning(f"훈련유형 불일치: {course_type}")
                         continue
@@ -188,14 +200,17 @@ def fetch_training_data(params: Dict[str, str]) -> List[Dict]:
                     }
                     result["교육비합계"] = result["신청인원"] * result["교육비"]
                     results.append(result)
+                    logger.info(f"데이터 추가: {result['훈련기관']} - {result['훈련과정명']}")
                 except (ValueError, TypeError) as e:
                     logger.warning(f"데이터 변환 중 오류 발생: {e}")
                     continue
                     
     except requests.RequestException as e:
+        logger.error(f"API 요청 중 오류 발생: {str(e)}")
         st.error(f"데이터를 가져오는 중 오류가 발생했습니다: {str(e)}")
         return []
     
+    logger.info(f"총 {len(results)}개의 데이터를 가져왔습니다.")
     cache[cache_key] = results
     return results
 
@@ -350,8 +365,12 @@ def main():
         "srchTraStDt": start_date.strftime("%Y%m%d"),
         "srchTraEndDt": end_date.strftime("%Y%m%d"),
     }
+    
+    logger.info(f"시작일: {start_date}, 종료일: {end_date}")
+    
     is_valid, error_message = validate_date_range(start_date, end_date)
     if not is_valid:
+        logger.error(f"날짜 범위 유효성 검사 실패: {error_message}")
         st.error(error_message)
         return
 
@@ -359,6 +378,7 @@ def main():
         results = fetch_training_data(params)
         if results:
             df = pd.DataFrame(results)
+            logger.info(f"데이터프레임 생성 완료: {len(df)}행")
             st.markdown("### 📈 요약 지표")
             create_summary_metrics(df)
             create_visualizations(df)
@@ -394,6 +414,7 @@ def main():
                         key='download-excel'
                     )
         else:
+            logger.warning("조건에 맞는 데이터가 없습니다.")
             st.warning("조건에 맞는 데이터가 없습니다.")
 
     # 푸터

@@ -143,11 +143,21 @@ def fetch_training_data(params: Dict[str, str]) -> List[Dict]:
     
     try:
         for page in range(1, 1000):
-            params["pageNum"] = str(page)
-            # HRD 아카이브 코드 강제 설정
-            params["crseTracseSe"] = "C0041H"
+            # API 요청 파라미터 설정 (2025.5.21 변경사항 반영)
+            request_params = {
+                "authKey": params["authKey"],
+                "returnType": "XML",
+                "outType": "1",
+                "pageNum": str(page),
+                "pageSize": "100",
+                "srchTraStDt": params["srchTraStDt"],
+                "srchTraEndDt": params["srchTraEndDt"],
+                "crseTracseSe": "C0041H",  # HRD 아카이브 코드
+                "sort": "ASC",
+                "sortCol": "TRNG_BGDE"  # 변경된 정렬 파라미터
+            }
             
-            response = requests.get(BASE_URL, params=params, timeout=30)
+            response = requests.get(BASE_URL, params=request_params, timeout=30)
             response.raise_for_status()
             
             root = ET.fromstring(response.content)
@@ -164,6 +174,7 @@ def fetch_training_data(params: Dict[str, str]) -> List[Dict]:
                     # 훈련유형 코드 확인
                     course_type = row.findtext("crseTracseSe", "").strip()
                     if course_type != "C0041H":
+                        logger.warning(f"훈련유형 불일치: {course_type}")
                         continue
                         
                     result = {
@@ -173,6 +184,7 @@ def fetch_training_data(params: Dict[str, str]) -> List[Dict]:
                         "개강일": row.findtext("traStartDate", "").strip(),
                         "신청인원": int(row.findtext("regCourseMan", "0")),
                         "교육비": int(row.findtext("realMan", "0")),
+                        "자격증": row.findtext("certificate", "").strip(),  # 추가된 자격증 항목
                     }
                     result["교육비합계"] = result["신청인원"] * result["교육비"]
                     results.append(result)
@@ -310,7 +322,6 @@ def main():
     with col1:
         st.markdown('**훈련유형**')
         st.markdown('<div class="graybox-text">HRD아카이브</div>', unsafe_allow_html=True)
-        course_type = "C0041H"  # HRD 아카이브 코드
     with col2:
         st.markdown('**개강일 범위 (시작)**')
         start_date = st.date_input(
@@ -336,14 +347,8 @@ def main():
     # 데이터 자동 수집 및 표시
     params = {
         "authKey": AUTH_KEY,
-        "returnType": "XML",
-        "outType": "1",
-        "pageSize": "100",
         "srchTraStDt": start_date.strftime("%Y%m%d"),
         "srchTraEndDt": end_date.strftime("%Y%m%d"),
-        "crseTracseSe": course_type,  # HRD 아카이브 코드 사용
-        "sort": "ASC",
-        "sortCol": "TRNG_BGDE",
     }
     is_valid, error_message = validate_date_range(start_date, end_date)
     if not is_valid:

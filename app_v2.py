@@ -144,6 +144,9 @@ def fetch_training_data(params: Dict[str, str]) -> List[Dict]:
     try:
         for page in range(1, 1000):
             params["pageNum"] = str(page)
+            # HRD 아카이브 코드 강제 설정
+            params["crseTracseSe"] = "C0041H"
+            
             response = requests.get(BASE_URL, params=params, timeout=30)
             response.raise_for_status()
             
@@ -158,8 +161,9 @@ def fetch_training_data(params: Dict[str, str]) -> List[Dict]:
                 
             for row in rows:
                 try:
-                    # HRD 아카이브 데이터만 필터링
-                    if row.findtext("crseTracseSe", "") != "C0041H":
+                    # 훈련유형 코드 확인
+                    course_type = row.findtext("crseTracseSe", "").strip()
+                    if course_type != "C0041H":
                         continue
                         
                     result = {

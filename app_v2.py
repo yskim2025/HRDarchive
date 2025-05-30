@@ -166,11 +166,6 @@ def fetch_training_data(params: Dict[str, str]) -> List[Dict]:
             logger.info(f"API 응답 상태 코드: {response.status_code}")
             logger.info(f"API 응답 헤더: {dict(response.headers)}")
             
-            # --- 추가: API 응답 원본 XML을 화면에 출력 ---
-            st.markdown(f"#### [디버그] API 응답 (page {page})")
-            st.code(response.text, language="xml")
-            # ------------------------------------------
-            
             root = ET.fromstring(response.content)
             srch_list = root.find("srchList")
             if srch_list is None:

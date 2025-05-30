@@ -152,7 +152,7 @@ def fetch_training_data(params: Dict[str, str]) -> List[Dict]:
                 "pageSize": "100",
                 "srchTraStDt": params["srchTraStDt"],
                 "srchTraEndDt": params["srchTraEndDt"],
-                "crseTracseSe": "C0041A",  # HRD 아카이브 코드 (변경됨)
+                "crseTracseSe": params.get("crseTracseSe", "C0041A"),  # 기본값을 HRD 아카이브로 설정
                 "sort": "ASC",
                 "sortCol": "TRNG_BGDE"  # 변경된 정렬 파라미터
             }
@@ -181,14 +181,6 @@ def fetch_training_data(params: Dict[str, str]) -> List[Dict]:
             
             for row in rows:
                 try:
-                    # 훈련유형 코드 확인
-                    course_type = row.findtext("crseTracseSe", "").strip()
-                    logger.info(f"훈련유형 코드: {course_type}")
-                    
-                    if course_type != "C0041A":  # HRD 아카이브 코드 변경
-                        logger.warning(f"훈련유형 불일치: {course_type}")
-                        continue
-                        
                     result = {
                         "훈련기관": row.findtext("subTitle", "").strip(),
                         "훈련과정명": row.findtext("title", "").strip(),
@@ -343,7 +335,18 @@ def main():
     col1, col2, col3 = st.columns([2, 2, 2])
     with col1:
         st.markdown('**훈련유형**')
-        st.markdown('<div class="graybox-text">HRD아카이브</div>', unsafe_allow_html=True)
+        training_type = st.selectbox(
+            "훈련유형 선택",
+            options=[
+                ("전체", ""),
+                ("일반직무훈련", "C0041T"),
+                ("기업직업훈련카드", "C0041B"),
+                ("고숙련신기술훈련", "C0041N"),
+                ("HRD 아카이브", "C0041A"),
+                ("패키지구독형 원격", "C0041H")
+            ],
+            format_func=lambda x: x[0]
+        )[1]
     with col2:
         st.markdown('**개강일 범위 (시작)**')
         start_date = st.date_input(
@@ -371,6 +374,7 @@ def main():
         "authKey": AUTH_KEY,
         "srchTraStDt": start_date.strftime("%Y%m%d"),
         "srchTraEndDt": end_date.strftime("%Y%m%d"),
+        "crseTracseSe": training_type
     }
     
     logger.info(f"시작일: {start_date}, 종료일: {end_date}")
